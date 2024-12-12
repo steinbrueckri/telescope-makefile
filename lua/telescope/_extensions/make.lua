@@ -57,6 +57,9 @@ local function run_target(cmd)
         cmd = config.make_bin .. " -C " .. makefile_dir .. " " .. target,
         direction = "horizontal",
         close_on_exit = false,
+		on_open = function(term)
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+		end,
     })
 
     run_term:toggle()
